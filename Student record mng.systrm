@@ -1,0 +1,68 @@
+
+#include <stdio.h>
+
+struct Student {
+    int roll;
+    char name[30];
+    float marks;
+};
+
+int main() {
+    struct Student s[50];
+    int choice, count = 0, i, roll, found;
+
+    do {
+        printf("\n--- STUDENT RECORD SYSTEM ---");
+        printf("\n1. Add Student");
+        printf("\n2. Display Students");
+        printf("\n3. Search Student");
+        printf("\n4. Exit");
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                printf("Enter Roll Number: ");
+                scanf("%d", &s[count].roll);
+                printf("Enter Name: ");
+                scanf(" %29[^\n]", s[count].name);
+                printf("Enter Marks: ");
+                scanf("%f", &s[count].marks);
+                count++;
+                printf("Record Added Successfully!");
+                break;
+
+            case 2:
+                for(i = 0; i < count; i++) {
+                    printf("\nRoll: %d", s[i].roll);
+                    printf("\nName: %s", s[i].name);
+                    printf("\nMarks: %.2f\n", s[i].marks);
+                }
+                break;
+
+            case 3:
+                printf("Enter Roll Number: ");
+                scanf("%d", &roll);
+                found = 0;
+                for(i = 0; i < count; i++) {
+                    if(s[i].roll == roll) {
+                        printf("Name: %s", s[i].name);
+                        printf("\nMarks: %.2f", s[i].marks);
+                        found = 1;
+                    }
+                }
+                if(found == 0)
+                    printf("Student Not Found!");
+                break;
+
+            case 4:
+                printf("Thank You!");
+                break;
+
+            default:
+                printf("Invalid Choice!");
+        }
+    } while(choice != 4);
+
+    return 0;
+}
